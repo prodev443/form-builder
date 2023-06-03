@@ -4,10 +4,11 @@
  */
 
 /**
- * Constructor de formulario para bootstrap 4 / 5
+ * Constructor de formulario
+ * * Preconfigurado para Boostrap 4
  * * Puede funcionar para cualquier framework en realidad
  */
-class BootstrapFormBuilder
+class FormBuilder
 {
     protected string $inputCssClass = 'form-control';
 
@@ -26,6 +27,8 @@ class BootstrapFormBuilder
     protected string $radioLabelCssClass = 'custom-control-label'; // TODO Setter
 
     protected string $radioContainerCssClass = 'custom-control custom-radio mb-2'; // TODO Setter
+
+    protected string $selectInputCssClass = 'custom-select mb-2'; // TODO Setter
 
     protected string $submitButtonCssClass = 'btn btn-primary mt-3'; // TODO Setter
 
@@ -495,6 +498,59 @@ class BootstrapFormBuilder
     public function addWeekField(string $name, string $label, string $description = '', array $attributes = [], string $invalidFeedback = ''): self
     {
         $this->addInputField('week', $name, $label, $description, $attributes, $invalidFeedback);
+        return $this;
+    }
+
+    /**
+     * Agrega un campo de lista de selección <select>
+     * @param string $name
+     * @param string $label
+     * @param array $options Array asociativo
+     * @param bool $required
+     * @param string $selectionMessage Ej. Seleccione una opción
+     * @param string $description
+     * @param string $invalidFeedback
+     * 
+     * @return self
+     */
+    public function addSelectField(string $name, string $label, array $options, bool $required = false, string $selectionMessage = 'Seleccione una opción', string $description = '', string $invalidFeedback = ''): self
+    {
+        $id = $name;
+        $isRequired = $required ? 'required' : '';
+        $describedBy = !empty($description) ? " aria-describedby=\"$id-help\"" : '';
+        $smallTag = !empty($description) ? "<small id=\"$id-help\" class=\"$this->smallTagCssClass\">$description</small>" : "";
+        $invalid = "<div id=\"$id-invalid-feedback\" class=\"$this->invalidFeedbackCssClass\">$invalidFeedback</div>";
+        $inputHtml = "<label for=\"$id\">$label</label>";
+        $inputHtml .= "<select name=\"$name\" class=\"{$this->selectInputCssClass}\" id=\"$id\" $describedBy $isRequired >";
+        $inputHtml .= "<option selected disabled value=\"\">$selectionMessage</option>";
+        foreach ($options as $key => $val) {
+            if(gettype($key) == 'string') {
+                $selected = '';
+                if (isset($this->values[$name])) {
+                    if ($this->values[$name] == $key) {
+                        $selected = 'selected';
+                    }
+                }
+                $inputHtml .= "<option value=\"$key\" $selected>$val</option>";
+            }
+        }
+        $inputHtml .= "</select>";
+        $inputHtml .= $invalid . $smallTag;
+        $this->html .= $inputHtml;
+        return $this;
+    }
+
+    /**
+     * Agrega una etiqueta <label>
+     * * No incluye atributo for
+     * @param string $label
+     * 
+     * @return self
+     */
+    public function addLabel(string $label): self
+    {
+        $inputHtml = "<label>$label</label>";
+        $this->html .= $inputHtml;
         return $this;
     }
 
