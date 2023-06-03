@@ -1,7 +1,8 @@
 <?php
-require_once __DIR__ . '/BootstrapFormBuilder.php';
+require_once __DIR__ . '/FormBuilder.php';
+require_once __DIR__ . '/countries.php';
 
-$builder = new BootstrapFormBuilder();
+$builder = new FormBuilder();
 
 // Valores por defecto
 $values = [
@@ -11,9 +12,11 @@ $values = [
     'phone' => '',
     'checkbox1' => 1,
     'email' => 'sammymalware@gmail.com',
-    'excerpt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente inventore expedita est accusamus ea error dolorem omnis porro cumque a eveniet amet, eos nostrum quaerat architecto repellendus tempore! Aperiam, asperiores.'
-    // 'animal' => 'tiger',
+    'excerpt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente inventore expedita est accusamus ea error dolorem omnis porro cumque a eveniet amet, eos nostrum quaerat architecto repellendus tempore! Aperiam, asperiores.',
+    'animal' => 'tiger',
+    'country' => 'MX',
 ];
+
 $htmlForm = $builder->setValues($values)
     ->addInputHiddenField('id_field')
     ->addDiv(function() use($builder){
@@ -42,12 +45,14 @@ $htmlForm = $builder->setValues($values)
     }, 'row')
     ->addDiv(function() use($builder){
         $builder->addDiv(function() use($builder){
-            $builder->addCheckboxField('checkbox1', 'Casilla 1');
-            $builder->addCheckboxField('checkbox2', 'Casilla 2');
+            $builder->addLabel('Casillas')
+                ->addCheckboxField('checkbox1', 'Casilla 1')
+                ->addCheckboxField('checkbox2', 'Casilla 2');
         }, 'col-md-6 col-sm-12')
             ->addDiv(function() use($builder){
-                $builder->addRadioField('animal', 'León', 'lion', '1', ['required'],);
-                $builder->addRadioField('animal', 'Tigre', 'tiger', '2');
+                $builder->addLabel('Animales')
+                    ->addRadioField('animal', 'León', 'lion', '1', ['required'],)
+                    ->addRadioField('animal', 'Tigre', 'tiger', '2');
             }, 'col-md-6 col-sm-12');
     }, 'row')
     ->addDiv(function() use($builder){
@@ -58,6 +63,7 @@ $htmlForm = $builder->setValues($values)
                 $builder->addTextField('street2', 'Calle 2');
             }, 'col-md-6 col-sm-12');
     }, 'row')
+    ->addSelectField('country', 'País', $countries, true)
     ->addTextAreaField('excerpt', 'Fragmento', 'Fragmento de texto')
     ->addSubmit()->get();
 ?>
