@@ -18,15 +18,15 @@ class FormBuilder
 
     protected string $checkboxInputCssClass = 'custom-control-input';
 
-    protected string $checkboxLabelCssClass = 'custom-control-label'; // TODO Setter
+    protected string $checkboxLabelCssClass = 'custom-control-label';
 
-    protected string $checkboxContainerCssClass = 'custom-control custom-checkbox custom-switch mb-2'; // TODO Setter
+    protected string $checkboxContainerCssClass = 'custom-control custom-checkbox custom-switch mb-2';
 
-    protected string $radioInputCssClass = 'custom-control-input'; // TODO Setter
+    protected string $radioInputCssClass = 'custom-control-input';
 
-    protected string $radioLabelCssClass = 'custom-control-label'; // TODO Setter
+    protected string $radioLabelCssClass = 'custom-control-label';
 
-    protected string $radioContainerCssClass = 'custom-control custom-radio mb-2'; // TODO Setter
+    protected string $radioContainerCssClass = 'custom-control custom-radio mb-2';
 
     protected string $selectInputCssClass = 'custom-select mb-2';
 
@@ -169,6 +169,61 @@ class FormBuilder
     public function setCheckboxInputCssClass(string $checkboxInputCssClass): self
     {
         $this->checkboxInputCssClass = $checkboxInputCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of checkboxLabelCssClass
+     * * Clase CSS para la etiqueta <label> de la casilla de verificación
+     */
+    public function setCheckboxLabelCssClass(string $checkboxLabelCssClass): self
+    {
+        $this->checkboxLabelCssClass = $checkboxLabelCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of checkboxContainerCssClass
+     * * Clase CSS para el contenedor <div> de la casilla de verificación
+     */
+    public function setCheckboxContainerCssClass(string $checkboxContainerCssClass): self
+    {
+        $this->checkboxContainerCssClass = $checkboxContainerCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of radioInputCssClass
+     * * Clase CSS para el <input> tipo radio
+     */
+    public function setRadioInputCssClass(string $radioInputCssClass): self
+    {
+        $this->radioInputCssClass = $radioInputCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of radioLabelCssClass
+     * * Clase CSS para la etiqueta <label> del <input> tipo radio
+     */
+    public function setRadioLabelCssClass(string $radioLabelCssClass): self
+    {
+        $this->radioLabelCssClass = $radioLabelCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of radioContainerCssClass
+     * * Clase CSS para el contenedor <div> del <input> tipo radio
+     */
+    public function setRadioContainerCssClass(string $radioContainerCssClass): self
+    {
+        $this->radioContainerCssClass = $radioContainerCssClass;
 
         return $this;
     }
