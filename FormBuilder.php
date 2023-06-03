@@ -10,39 +10,96 @@
  */
 class FormBuilder
 {
-    protected string $inputCssClass = 'form-control';
-
-    protected string $smallTagCssClass = 'form-text text-muted mb-2';
-
-    protected string $invalidFeedbackCssClass = 'invalid-feedback';
-
-    protected string $checkboxInputCssClass = 'custom-control-input';
-
-    protected string $checkboxLabelCssClass = 'custom-control-label';
-
-    protected string $checkboxContainerCssClass = 'custom-control custom-checkbox custom-switch mb-2';
-
-    protected string $radioInputCssClass = 'custom-control-input';
-
-    protected string $radioLabelCssClass = 'custom-control-label';
-
-    protected string $radioContainerCssClass = 'custom-control custom-radio mb-2';
-
-    protected string $selectInputCssClass = 'custom-select mb-2';
-
-    protected string $submitButtonCssClass = 'btn btn-primary mt-3';
-
+    /**
+     * Id (html) del formulario
+     * @var string
+     */
     protected string $formId = '';
 
+    /**
+     * * Formulario HTML Generado
+     * @var string
+     */
     protected string $html = '';
 
+    /**
+     * * Valores por defecto del formulario
+     * @var array
+     */
     protected array $values = [];
 
-    protected string $action = '';
+    /**
+     * * Clase CSS para las etiquetas <input>
+     * * Aplica para los tipos: date, datetime-local, email, month, number, password, tel, text, time, url, week
+     * @var string
+     */
+    protected string $inputCssClass = 'form-control';
 
-    protected string $method =  '';
+    /**
+     * * Clase CSS para la descripción del campo
+     * @var string
+     */
+    protected string $smallTagCssClass = 'form-text text-muted mb-2';
 
-    private array $allowedInputAttributes = [
+    /**
+     * * Clase CSS para la capa de feedback inválido
+     * @var string
+     */
+    protected string $invalidFeedbackCssClass = 'invalid-feedback';
+
+    /**
+     * * Clase CSS para la casilla de verificación
+     * @var string
+     */
+    protected string $checkboxInputCssClass = 'custom-control-input';
+
+    /**
+     * * Clase CSS para la etiqueta <label> de la casilla de verificación
+     * @var string
+     */
+    protected string $checkboxLabelCssClass = 'custom-control-label';
+
+    /**
+     * * Clase CSS para el contenedor <div> de la casilla de verificación
+     * @var string
+     */
+    protected string $checkboxContainerCssClass = 'custom-control custom-checkbox custom-switch mb-2';
+
+    /**
+     * * Clase CSS para el <input> tipo radio
+     * @var string
+     */
+    protected string $radioInputCssClass = 'custom-control-input';
+
+    /**
+     * * Clase CSS para la etiqueta <label> del <input> tipo radio
+     * @var string
+     */
+    protected string $radioLabelCssClass = 'custom-control-label';
+
+    /**
+     * * Clase CSS para el contenedor <div> del <input> tipo radio
+     * @var string
+     */
+    protected string $radioContainerCssClass = 'custom-control custom-radio mb-2';
+
+    /**
+     * * Clase CSS para la caja de selección
+     * @var string
+     */
+    protected string $selectInputCssClass = 'custom-select mb-2';
+
+    /**
+     * * Clase CSS para el botón de envío
+     * @var string
+     */
+    protected string $submitButtonCssClass = 'btn btn-primary mt-3';
+
+    /**
+     * * Atributos HTML permitidos para la etiqueta <input>
+     * @var array
+     */
+    protected array $allowedInputAttributes = [
         'accept',
         'alt',
         'autocomplete',
@@ -73,6 +130,11 @@ class FormBuilder
         'width',
     ];
 
+    /**
+     * @param string $id Id HTML
+     * @param string $method GET|POST
+     * @param string $action URL
+     */
     public function __construct($id = '', $method = '', $action = '')
     {
         $id = !empty($id) ? "id=\"$id\"" : "";
@@ -83,11 +145,10 @@ class FormBuilder
         $this->html .= $openTag;
     }
 
-    // Setters
+    // Inician Setters
 
     /**
      * Set the value of values
-     * * Valores por defecto del formulario
      * @param array $values
      * 
      * @return self
@@ -101,13 +162,11 @@ class FormBuilder
 
     /**
      * Set the value of inputCssClass
-     * * Clase CSS para las etiquetas <input>
-     * * Aplica para los tipos: date, datetime-local, email, month, number, password, tel, text, time, url, week
-     * @param mixed $inputCssClass
-     * 
+     * @param string $inputCssClass
+
      * @return self
      */
-    public function setInputCssClass($inputCssClass): self
+    public function setInputCssClass(string $inputCssClass): self
     {
         $this->inputCssClass = $inputCssClass;
 
@@ -116,12 +175,11 @@ class FormBuilder
 
     /**
      * Set the value of smallTagCssClass
-     * * Clase CSS para la descripción del campo
-     * @param mixed $smallTagCssClass
+     * @param string $smallTagCssClass
      * 
      * @return self
      */
-    public function setSmallTagCssClass($smallTagCssClass): self
+    public function setSmallTagCssClass(string $smallTagCssClass): self
     {
         $this->smallTagCssClass = $smallTagCssClass;
 
@@ -130,7 +188,9 @@ class FormBuilder
 
     /**
      * Set the value of submitButtonCssClass
-     * * Clase CSS para el botón de envío
+     * @param string $submitButtonCssClass
+     * 
+     * @return self
      */
     public function setSubmitButtonCssClass(string $submitButtonCssClass): self
     {
@@ -141,8 +201,9 @@ class FormBuilder
 
     /**
      * Set the value of selectInputCssClass
-     * * Clase CSS para la caja de selección
+     * @param string $selectInputCssClass
      * 
+     * @return self
      */
     public function setSelectInputCssClass(string $selectInputCssClass): self
     {
@@ -153,7 +214,9 @@ class FormBuilder
 
     /**
      * Set the value of invalidFeedbackCssClass
-     * * Clase CSS para la capa de feedback inválido
+     * @param string $invalidFeedbackCssClass
+     * 
+     * @return self
      */
     public function setInvalidFeedbackCssClass(string $invalidFeedbackCssClass): self
     {
@@ -164,7 +227,9 @@ class FormBuilder
 
     /**
      * Set the value of checkboxInputCssClass
-     * * Clase CSS para la casilla de verificación
+     * @param string $checkboxInputCssClass
+     * 
+     * @return self
      */
     public function setCheckboxInputCssClass(string $checkboxInputCssClass): self
     {
@@ -175,7 +240,9 @@ class FormBuilder
 
     /**
      * Set the value of checkboxLabelCssClass
-     * * Clase CSS para la etiqueta <label> de la casilla de verificación
+     * @param string $checkboxLabelCssClass
+     * 
+     * @return self
      */
     public function setCheckboxLabelCssClass(string $checkboxLabelCssClass): self
     {
@@ -186,7 +253,9 @@ class FormBuilder
 
     /**
      * Set the value of checkboxContainerCssClass
-     * * Clase CSS para el contenedor <div> de la casilla de verificación
+     * @param string $checkboxContainerCssClass
+     * 
+     * @return self
      */
     public function setCheckboxContainerCssClass(string $checkboxContainerCssClass): self
     {
@@ -197,7 +266,9 @@ class FormBuilder
 
     /**
      * Set the value of radioInputCssClass
-     * * Clase CSS para el <input> tipo radio
+     * @param string $radioInputCssClass
+     * 
+     * @return self
      */
     public function setRadioInputCssClass(string $radioInputCssClass): self
     {
@@ -208,7 +279,9 @@ class FormBuilder
 
     /**
      * Set the value of radioLabelCssClass
-     * * Clase CSS para la etiqueta <label> del <input> tipo radio
+     * @param string $radioLabelCssClass
+     * 
+     * @return self
      */
     public function setRadioLabelCssClass(string $radioLabelCssClass): self
     {
@@ -219,7 +292,9 @@ class FormBuilder
 
     /**
      * Set the value of radioContainerCssClass
-     * * Clase CSS para el contenedor <div> del <input> tipo radio
+     * @param string $radioContainerCssClass
+     * 
+     * @return self
      */
     public function setRadioContainerCssClass(string $radioContainerCssClass): self
     {
@@ -227,6 +302,8 @@ class FormBuilder
 
         return $this;
     }
+
+    // Terminan Setters
     
     /**
      * Retorna el formulario construido
