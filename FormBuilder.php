@@ -14,9 +14,9 @@ class FormBuilder
 
     protected string $smallTagCssClass = 'form-text text-muted mb-2';
 
-    protected string $invalidFeedbackCssClass = 'invalid-feedback'; // TODO Setter
+    protected string $invalidFeedbackCssClass = 'invalid-feedback';
 
-    protected string $checkboxInputCssClass = 'custom-control-input'; // TODO Setter
+    protected string $checkboxInputCssClass = 'custom-control-input';
 
     protected string $checkboxLabelCssClass = 'custom-control-label'; // TODO Setter
 
@@ -28,9 +28,9 @@ class FormBuilder
 
     protected string $radioContainerCssClass = 'custom-control custom-radio mb-2'; // TODO Setter
 
-    protected string $selectInputCssClass = 'custom-select mb-2'; // TODO Setter
+    protected string $selectInputCssClass = 'custom-select mb-2';
 
-    protected string $submitButtonCssClass = 'btn btn-primary mt-3'; // TODO Setter
+    protected string $submitButtonCssClass = 'btn btn-primary mt-3';
 
     protected string $formId = '';
 
@@ -83,6 +83,8 @@ class FormBuilder
         $this->html .= $openTag;
     }
 
+    // Setters
+
     /**
      * Set the value of values
      * * Valores por defecto del formulario
@@ -99,7 +101,7 @@ class FormBuilder
 
     /**
      * Set the value of inputCssClass
-     * * Clase CSS para las etiquetas <input>, por defecto: form-control
+     * * Clase CSS para las etiquetas <input>
      * * Aplica para los tipos: date, datetime-local, email, month, number, password, tel, text, time, url, week
      * @param mixed $inputCssClass
      * 
@@ -114,7 +116,7 @@ class FormBuilder
 
     /**
      * Set the value of smallTagCssClass
-     * * Clase CSS para la descripción del campo, por defecto: form-text text-muted
+     * * Clase CSS para la descripción del campo
      * @param mixed $smallTagCssClass
      * 
      * @return self
@@ -126,6 +128,51 @@ class FormBuilder
         return $this;
     }
 
+    /**
+     * Set the value of submitButtonCssClass
+     * * Clase CSS para el botón de envío
+     */
+    public function setSubmitButtonCssClass(string $submitButtonCssClass): self
+    {
+        $this->submitButtonCssClass = $submitButtonCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of selectInputCssClass
+     * * Clase CSS para la caja de selección
+     * 
+     */
+    public function setSelectInputCssClass(string $selectInputCssClass): self
+    {
+        $this->selectInputCssClass = $selectInputCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of invalidFeedbackCssClass
+     * * Clase CSS para la capa de feedback inválido
+     */
+    public function setInvalidFeedbackCssClass(string $invalidFeedbackCssClass): self
+    {
+        $this->invalidFeedbackCssClass = $invalidFeedbackCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of checkboxInputCssClass
+     * * Clase CSS para la casilla de verificación
+     */
+    public function setCheckboxInputCssClass(string $checkboxInputCssClass): self
+    {
+        $this->checkboxInputCssClass = $checkboxInputCssClass;
+
+        return $this;
+    }
+    
     /**
      * Retorna el formulario construido
      * @return string
