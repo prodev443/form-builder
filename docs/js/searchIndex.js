@@ -108,7 +108,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\FormBuilder\u003A\u003AgetInputValue\u0028\u0029",
             "name": "getInputValue",
-            "summary": "Obtiene\u0020el\u0020valor\u0020predefinido\u0020para\u0020un\u0020campo",
+            "summary": "",
             "url": "classes/FormBuilder.html#method_getInputValue"
         },                {
             "fqsen": "\\FormBuilder\u003A\u003AgetChecked\u0028\u0029",
