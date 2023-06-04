@@ -34,6 +34,13 @@ class FormBuilder
      * @var string
      */
     protected string $inputCssClass = 'form-control';
+    
+    /**
+     * * Clase CSS para las etiquetas <label> de algunos campos
+     * * Aplica para los tipos: date, datetime-local, email, month, number, password, tel, text, time, url, week
+     * @var string
+     */
+    protected string $inputLabelCssClass = 'control-label';
 
     /**
      * * Clase CSS para la descripción del campo
@@ -209,6 +216,19 @@ class FormBuilder
     public function setInputCssClass(string $inputCssClass): self
     {
         $this->inputCssClass = $inputCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of inputLabelCssClass
+     * @param string $inputLabelCssClass
+     * 
+     * @return self
+     */
+    public function setInputLabelCssClass(string $inputLabelCssClass): self
+    {
+        $this->inputLabelCssClass = $inputLabelCssClass;
 
         return $this;
     }
@@ -549,7 +569,7 @@ class FormBuilder
         $smallTag = !empty($description) ? "<small id=\"$id-help\" class=\"$this->smallTagCssClass\">$description</small>" : "";
         $attributesString = $this->processInputAttributes($attributes);
         $invalid = "<div id=\"$id-invalid-feedback\" class=\"$this->invalidFeedbackCssClass\">$invalidFeedback</div>";
-        $inputHtml = "<label for=\"$id\">$label</label>";
+        $inputHtml = "<label class=\"{$this->inputLabelCssClass}\" for=\"$id\">$label</label>";
         $inputHtml .= "<input name=\"$name\" type=\"$type\" class=\"$this->inputCssClass\" id=\"$id\" $value $describedBy $attributesString>$invalid";
         $inputHtml .= $smallTag;
         $this->html .= $inputHtml;
