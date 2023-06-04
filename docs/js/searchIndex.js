@@ -21,6 +21,11 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020value\u0020of\u0020inputCssClass",
             "url": "classes/FormBuilder.html#method_setInputCssClass"
         },                {
+            "fqsen": "\\FormBuilder\u003A\u003AsetInputLabelCssClass\u0028\u0029",
+            "name": "setInputLabelCssClass",
+            "summary": "Set\u0020the\u0020value\u0020of\u0020inputLabelCssClass",
+            "url": "classes/FormBuilder.html#method_setInputLabelCssClass"
+        },                {
             "fqsen": "\\FormBuilder\u003A\u003AsetSmallTagCssClass\u0028\u0029",
             "name": "setSmallTagCssClass",
             "summary": "Set\u0020the\u0020value\u0020of\u0020smallTagCssClass",
@@ -255,6 +260,11 @@ Search.appendIndex(
             "name": "inputCssClass",
             "summary": "\u002A\u0020Clase\u0020CSS\u0020para\u0020las\u0020etiquetas\u0020\u003Cinput\u003E\n\u002A\u0020Aplica\u0020para\u0020los\u0020tipos\u003A\u0020date,\u0020datetime\u002Dlocal,\u0020email,\u0020month,\u0020number,\u0020password,\u0020tel,\u0020text,\u0020time,\u0020url,\u0020week",
             "url": "classes/FormBuilder.html#property_inputCssClass"
+        },                {
+            "fqsen": "\\FormBuilder\u003A\u003A\u0024inputLabelCssClass",
+            "name": "inputLabelCssClass",
+            "summary": "\u002A\u0020Clase\u0020CSS\u0020para\u0020las\u0020etiquetas\u0020\u003Clabel\u003E\u0020de\u0020algunos\u0020campos\n\u002A\u0020Aplica\u0020para\u0020los\u0020tipos\u003A\u0020date,\u0020datetime\u002Dlocal,\u0020email,\u0020month,\u0020number,\u0020password,\u0020tel,\u0020text,\u0020time,\u0020url,\u0020week",
+            "url": "classes/FormBuilder.html#property_inputLabelCssClass"
         },                {
             "fqsen": "\\FormBuilder\u003A\u003A\u0024smallTagCssClass",
             "name": "smallTagCssClass",
