@@ -175,7 +175,7 @@ class FormBuilder
      * @param string $method GET|POST
      * @param string $action URL
      */
-    public function __construct($id = '', $method = '', $action = '')
+    public function __construct(string $id = '', string $method = '', string $action = '')
     {
         $id = !empty($id) ? "id=\"$id\"" : "";
         $method = !empty($method) ? "method=\"$method\"" : "";
@@ -576,6 +576,16 @@ class FormBuilder
         return $this;
     }
 
+    /**
+     * * Agrega un campo Radio Button
+     * @param string $name
+     * @param string $label
+     * @param string $value
+     * @param string $idSuffix Sufijo para que no duplique el Id, ej. '1'
+     * @param array $attributes
+     * 
+     * @return self
+     */
     public function addRadioField(string $name, string $label, string $value, string $idSuffix, array $attributes = []): self
     {
         $id = "{$name}-{$idSuffix}";
