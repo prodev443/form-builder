@@ -143,7 +143,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\FormBuilder\u003A\u003AaddRadioField\u0028\u0029",
             "name": "addRadioField",
-            "summary": "",
+            "summary": "\u002A\u0020Agrega\u0020un\u0020campo\u0020Radio\u0020Button",
             "url": "classes/FormBuilder.html#method_addRadioField"
         },                {
             "fqsen": "\\FormBuilder\u003A\u003AaddInputHiddenField\u0028\u0029",
