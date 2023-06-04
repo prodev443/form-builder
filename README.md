@@ -16,11 +16,11 @@ php -S localhost:8000
 
 ## Asignación automática de Ids del DOM
 
-1. <input> de texto (text, email, password, etc.): Se toma el mismo valor que el atributo "name"
-2. <input> checkbox: Se toma el mismo valor que el atributo "name"
-3. <input> de radio: Se toma el mismo valor que el atributo "name" y se le añade un sufijo definido por el usuario, el cual debe ser único para cada elemento radio de entre el conjunto que compartan el mismo atributo "name"
-4. <textarea>: Se toma el mismo valor que el atributo "name"
-5. <select>: Se toma el mismo valor que el atributo "name"
+1. input de texto (text, email, password, etc.): Se toma el mismo valor que el atributo "name"
+2. input checkbox: Se toma el mismo valor que el atributo "name"
+3. input de radio: Se toma el mismo valor que el atributo "name" y se le añade un sufijo definido por el usuario, el cual debe ser único para cada elemento radio de entre el conjunto que compartan el mismo atributo "name"
+4. textarea: Se toma el mismo valor que el atributo "name"
+5. select: Se toma el mismo valor que el atributo "name"
 
 ## Limitaciones
 
