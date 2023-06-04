@@ -434,15 +434,18 @@ class FormBuilder
     }
 
     /**
-     * Obtiene el valor predefinido para un campo
-     * @param mixed $name
+     * @param string $name* Retorna el valor predefinido para un campo como un atributo html, ej. value="valor"
+     * * $includeAttributeText Activa el retorno completo del atributo, si se desactiva no se retorna el texto value="" y retorna solo el valor predefinido
+     * @param bool $includeAttributeText Activa el retorno completo del atributo
      * 
      * @return string
      */
-    protected function getInputValue($name): string
+    protected function getInputValue(string $name, bool $includeAttributeText = true): string
     {
         if (isset($this->values[$name])) {
-            return "value=\"{$this->values[$name]}\"";
+            $attributeText = $includeAttributeText ? "value=\"" : '';
+            $endAttributeText = $includeAttributeText ? "\"" : '';
+            return $attributeText . $this->values[$name] . $endAttributeText;
         }
         return '';
     }
@@ -661,7 +664,7 @@ class FormBuilder
     public function addTextAreaField(string $name, string $label, string $description = '', int $rows = 3, array $attributes = [], string $invalidFeedback = ''): self
     {
         $id = $name;
-        $value = $this->getInputValue($name);
+        $value = $this->getInputValue($name, false);
         $describedBy = !empty($description) ? " aria-describedby=\"$id-help\"" : '';
         $smallTag = !empty($description) ? "<small id=\"$id-help\" class=\"$this->smallTagCssClass\">$description</small>" : "";
         $attributesString = $this->processInputAttributes($attributes);
