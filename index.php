@@ -15,6 +15,7 @@ $values = [
     'excerpt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente inventore expedita est accusamus ea error dolorem omnis porro cumque a eveniet amet, eos nostrum quaerat architecto repellendus tempore! Aperiam, asperiores.',
     'animal' => 'tiger',
     'country' => 'MX',
+    'cv' => 'http://www.localhost.com'
 ];
 
 $htmlForm = $builder->setValues($values)
@@ -64,6 +65,7 @@ $htmlForm = $builder->setValues($values)
             }, 'col-md-6 col-sm-12');
     }, 'row')
     ->addSelectField('country', 'País', $countries, true)
+    ->addFileField('cv', 'Currículum Vitae', 'Currículum Vitae el formato PDF', ['required'])
     ->addTextAreaField('excerpt', 'Fragmento', 'Fragmento de texto')
     ->addSubmit()->get();
 ?>
@@ -74,6 +76,7 @@ $htmlForm = $builder->setValues($values)
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link type="image/png" sizes="16x16" rel="icon" href="assets/icons8-form-dotted-16.png">
     <link type="image/png" sizes="32x32" rel="icon" href="assets/icons8-form-dotted-32.png">

@@ -90,6 +90,46 @@ class FormBuilder
     protected string $selectInputCssClass = 'custom-select mb-2';
 
     /**
+     * * Clase CSS para el <input> tipo radio
+     * @var string
+     */
+    protected string $fileInputCssClass = 'custom-file-input';
+
+    /**
+     * * Clase CSS para la etiqueta <label> del <input> tipo file
+     * @var string
+     */
+    protected string $fileLabelCssClass = 'custom-file-label';
+
+    /**
+     * * Clase CSS para el contenedor <div> del <input> tipo file
+     * @var string
+     */
+    protected string $fileContainerCssClass = 'custom-file';
+
+    /**
+     * * Botón HTML para actualizar archivo
+     * * Debe iniciar estrictamente con <button
+     * * No debe contener id del DOM
+     * @var string
+     */
+    protected string $updateFileButton = '<button type="button" class="btn btn-info ml-2"><i class="bx bx-cloud-upload"></i></button>';
+    
+    /**
+     * * Botón HTML para eliminar archivo
+     * * Debe iniciar estrictamente con <button
+     * * No debe contener id del DOM
+     * @var string
+     */
+    protected string $deleteFileButton = '<button type="button" class="btn btn-danger ml-2"><i class="bx bx-trash" ></i></button>';
+
+    /**
+     * * Clase CSS para el contenedor de los botones del campo archivo
+     * @var string
+     */
+    protected string $fileButtonsContainerCssClass = 'd-flex';
+
+    /**
      * * Clase CSS para el botón de envío
      * @var string
      */
@@ -303,6 +343,84 @@ class FormBuilder
         return $this;
     }
 
+    /**
+     * Set the value of fileInputCssClass
+     * @param string $fileInputCssClass
+     * 
+     * @return self
+     */
+    public function setFileInputCssClass(string $fileInputCssClass): self
+    {
+        $this->fileInputCssClass = $fileInputCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of fileLabelCssClass
+     * @param string $fileLabelCssClass
+     * 
+     * @return self
+     */
+    public function setFileLabelCssClass(string $fileLabelCssClass): self
+    {
+        $this->fileLabelCssClass = $fileLabelCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of fileContainerCssClass
+     * @param string $fileContainerCssClass
+     * 
+     * @return self
+     */
+    public function setFileContainerCssClass(string $fileContainerCssClass): self
+    {
+        $this->fileContainerCssClass = $fileContainerCssClass;
+
+        return $this;
+    }
+    
+    /**
+     * Set the value of updateFileButton
+     * @param string $updateFileButton
+     * 
+     * @return self
+     */
+    public function setUpdateFileButton(string $updateFileButton): self
+    {
+        $this->updateFileButton = $updateFileButton;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of deleteFileButton
+     * @param string $deleteFileButton
+     * 
+     * @return self
+     */
+    public function setDeleteFileButton(string $deleteFileButton): self
+    {
+        $this->deleteFileButton = $deleteFileButton;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of fileButtonsContainerCssClass
+     * @param string $fileButtonsContainerCssClass
+     * 
+     * @return self
+     */
+    public function setFileButtonsContainerCssClass(string $fileButtonsContainerCssClass): self
+    {
+        $this->fileButtonsContainerCssClass = $fileButtonsContainerCssClass;
+
+        return $this;
+    }
+
     // Terminan Setters
     
     /**
@@ -382,6 +500,31 @@ class FormBuilder
             }
         }
         return $attributesString;
+    }
+
+    /**
+     * Genera una sección con botones de eliminación y actualización para el campo de archivo
+     * @param mixed $id
+     * @param mixed $name
+     * @param mixed $attributes
+     * 
+     * @return string
+     */
+    protected function getFileUploadSection($id, $name, $attributes): string
+    {
+        $value = $this->getInputValue($name);
+        $section = '';
+        if (!empty($value)) {
+            $section .= "<div class=\"{$this->fileButtonsContainerCssClass}\">";
+            $updateBtn = str_replace('<button', "<button id=\"$id-update-btn\"", $this->updateFileButton);
+            $section .= $updateBtn;
+            if (!in_array('required', $attributes)) {
+                $deleteBtn = str_replace('<button', "<button id=\"$id-delete-btn\"", $this->deleteFileButton);
+                $section .= $deleteBtn;
+            }
+            $section .= "</div>";
+        }
+        return $section;
     }
 
     /**
@@ -701,20 +844,44 @@ class FormBuilder
         $invalid = "<div id=\"$id-invalid-feedback\" class=\"$this->invalidFeedbackCssClass\">$invalidFeedback</div>";
         $inputHtml = "<label for=\"$id\">$label</label>";
         $inputHtml .= "<select name=\"$name\" class=\"{$this->selectInputCssClass}\" id=\"$id\" $describedBy $isRequired >";
-        $inputHtml .= "<option selected disabled value=\"\">$selectionMessage</option>";
+        $selectedSelectionMessage = true;
         foreach ($options as $key => $val) {
             if(gettype($key) == 'string') {
                 $selected = '';
                 if (isset($this->values[$name])) {
                     if ($this->values[$name] == $key) {
                         $selected = 'selected';
+                        $selectedSelectionMessage = false;
                     }
                 }
                 $inputHtml .= "<option value=\"$key\" $selected>$val</option>";
             }
         }
+        $selected = $selectedSelectionMessage ? 'selected' : '';
+        $inputHtml .= "<option $selected disabled value=\"\">$selectionMessage</option>";
         $inputHtml .= "</select>";
         $inputHtml .= $invalid . $smallTag;
+        $this->html .= $inputHtml;
+        return $this;
+    }
+
+    public function addFileField(string $name, string $label, string $description = '', array $attributes = [], string $invalidFeedback = '')
+    {
+        $id = $name;
+        $describedBy = !empty($description) ? " aria-describedby=\"$id-help\"" : '';
+        $smallTag = !empty($description) ? "<small id=\"$id-help\" class=\"$this->smallTagCssClass\">$description</small>" : "";
+        $attributesString = $this->processInputAttributes($attributes);
+        $invalid = "<div id=\"$id-invalid-feedback\" class=\"$this->invalidFeedbackCssClass\">$invalidFeedback</div>";
+        $inputHtml = "<div class=\"d-flex flex-row\">";
+        $inputHtml .= "<div class=\"{$this->fileContainerCssClass}\">";
+        $inputHtml .= "<label for=\"$id\" class=\"{$this->fileLabelCssClass}\">$label</label>";
+        $inputHtml .= "<input name=\"$name\" type=\"file\" class=\"{$this->fileInputCssClass}\" id=\"$id\" $describedBy $attributesString>";
+        $inputHtml .= "</div>";
+        $inputHtml .= $this->getFileUploadSection($id, $name, $attributes);
+        $inputHtml .= "</div>";
+        $inputHtml .= "<div>"; // Invalid feedback and description div
+        $inputHtml .= $invalid . $smallTag;
+        $inputHtml .= "</div>";
         $this->html .= $inputHtml;
         return $this;
     }
