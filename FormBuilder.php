@@ -104,6 +104,12 @@ class FormBuilder
     protected string $selectInputCssClass = 'custom-select mb-2';
 
     /**
+     * * Clase CSS para el contenedor <div> de una caja de selección
+     * @var string
+     */
+    protected string $selectContainerCssClass = 'form-group';
+
+    /**
      * * Clase CSS para el <input> tipo radio
      * @var string
      */
@@ -288,6 +294,19 @@ class FormBuilder
     public function setSelectInputCssClass(string $selectInputCssClass): self
     {
         $this->selectInputCssClass = $selectInputCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of selectContainerCssClass
+     * @param string $selectContainerCssClass
+     * 
+     * @return self
+     */
+    public function setSelectContainerCssClass(string $selectContainerCssClass): self
+    {
+        $this->selectContainerCssClass = $selectContainerCssClass;
 
         return $this;
     }
@@ -897,7 +916,8 @@ class FormBuilder
         $describedBy = !empty($description) ? " aria-describedby=\"$id-help\"" : '';
         $smallTag = !empty($description) ? "<small id=\"$id-help\" class=\"$this->smallTagCssClass\">$description</small>" : "";
         $invalid = "<div id=\"$id-invalid-feedback\" class=\"$this->invalidFeedbackCssClass\">$invalidFeedback</div>";
-        $inputHtml = "<label for=\"$id\">$label</label>";
+        $inputHtml = "<div class=\"{$this->selectContainerCssClass}\">";
+        $inputHtml .= "<label for=\"$id\">$label</label>";
         $inputHtml .= "<select name=\"$name\" class=\"{$this->selectInputCssClass}\" id=\"$id\" $describedBy $isRequired >";
         $selectedSelectionMessage = true;
         foreach ($options as $key => $val) {
@@ -916,6 +936,7 @@ class FormBuilder
         $inputHtml .= "<option $selected disabled value=\"\">$selectionMessage</option>";
         $inputHtml .= "</select>";
         $inputHtml .= $invalid . $smallTag;
+        $inputHtml .= "</div>";
         $this->html .= $inputHtml;
         return $this;
     }
