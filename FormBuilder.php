@@ -43,10 +43,17 @@ class FormBuilder
     protected string $inputLabelCssClass = 'control-label';
 
     /**
+     * * Clase CSS para el contenedor de algunos campos <input>
+     * * Aplica para los tipos: date, datetime-local, email, month, number, password, tel, text, time, url, week
+     * @var string
+     */
+    protected string $inputContainerCssClass = 'form-group';
+
+    /**
      * * Clase CSS para la descripción del campo
      * @var string
      */
-    protected string $smallTagCssClass = 'form-text text-muted mb-2';
+    protected string $smallTagCssClass = 'form-text text-muted';
 
     /**
      * * Clase CSS para la capa de feedback inválido
@@ -229,6 +236,19 @@ class FormBuilder
     public function setInputLabelCssClass(string $inputLabelCssClass): self
     {
         $this->inputLabelCssClass = $inputLabelCssClass;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of inputContainerCssClass
+     * @param string $inputContainerCssClass
+     * 
+     * @return self
+     */
+    public function setInputContainerCssClass(string $inputContainerCssClass): self
+    {
+        $this->inputContainerCssClass = $inputContainerCssClass;
 
         return $this;
     }
@@ -569,9 +589,11 @@ class FormBuilder
         $smallTag = !empty($description) ? "<small id=\"$id-help\" class=\"$this->smallTagCssClass\">$description</small>" : "";
         $attributesString = $this->processInputAttributes($attributes);
         $invalid = "<div id=\"$id-invalid-feedback\" class=\"$this->invalidFeedbackCssClass\">$invalidFeedback</div>";
-        $inputHtml = "<label class=\"{$this->inputLabelCssClass}\" for=\"$id\">$label</label>";
-        $inputHtml .= "<input name=\"$name\" type=\"$type\" class=\"$this->inputCssClass\" id=\"$id\" $value $describedBy $attributesString>$invalid";
-        $inputHtml .= $smallTag;
+        $inputHtml = "<div class=\"{$this->inputContainerCssClass}\">";
+        $inputHtml .= "<label class=\"{$this->inputLabelCssClass}\" for=\"$id\">$label</label>";
+        $inputHtml .= "<input name=\"$name\" type=\"$type\" class=\"$this->inputCssClass\" id=\"$id\" $value $describedBy $attributesString>";
+        $inputHtml .= $invalid . $smallTag;
+        $inputHtml .= "</div>";
         $this->html .= $inputHtml;
         return $this;
     }
